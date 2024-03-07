@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora da Fly</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffe6e6; /* Rosa mais claro */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background-color: #ff99cc; /* Rosa normal */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    h1 {
+        color: #333; /* Cor do texto */
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .checkbox-group {
+        display: flex;
+        align-items: left;
+        justify-content: flex-start; /* Alinhamento à esquerda */
+        gap: 48px;
+    }
+    .checkbox-group input[type="radio"] {
+        margin-right: 5px;
+    }
+    input[type="text"] {
+        width: 60px; /* Tamanho reduzido */
+        padding: 8px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+    input[type="radio"] {
+        margin-right: 15px; /* Espaçamento menor */
+        transform: scale(1);
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #resultado {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Calculadora da Fly</h1>
+    <form id="calcForm">
+        <div class="form-group">
+            <label for="nivelTrabalho">Nível do Trabalho:</label>
+            <div class="checkbox-group">
+                <input type="radio" name="nivel" id="facil" value="50">
+                <label for="facil">Fácil</label>
+                <input type="radio" name="nivel" id="medio" value="60">
+                <label for="medio">Médio</label>
+                <input type="radio" name="nivel" id="dificil" value="70">
+                <label for="dificil">Difícil</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="horasSemana">Horas por Semana:</label>
+            <input type="text" id="horasSemana">
+        </div>
+        <div class="form-group">
+            <label for="semanas">Semanas:</label>
+            <input type="radio" name="semanas" id="semanas4" value="4"> <label for="semanas4">4</label>
+            <input type="radio" name="semanas" id="semanas45" value="4.5"> <label for="semanas45">4.5</label>
+            <input type="radio" name="semanas" id="semanas5" value="5"> <label for="semanas5">5</label>
+        </div>
+        <input type="submit" value="Calcular">
+    </form>
+    <div id="resultado"></div>
+</div>
+
+<script>
+    document.getElementById("calcForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let nivelSelecionado = document.querySelector('input[name="nivel"]:checked');
+        let horasSemana = parseFloat(document.getElementById("horasSemana").value);
+        let semanas = parseFloat(document.querySelector('input[name="semanas"]:checked').value);
+        let valorTotal = nivelSelecionado ? parseFloat(nivelSelecionado.value) * horasSemana * semanas : 0;
+        document.getElementById("resultado").textContent = `O valor a ser cobrado é: R$ ${valorTotal.toFixed(2)}`;
+    });
+</script>
+</body>
+</html>
